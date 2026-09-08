@@ -229,8 +229,16 @@ section{padding:90px 0; position:relative;}
 .ov-body{padding:8px 34px 70px;}
 .ov-body h2{font-size:clamp(28px,4vw,42px); text-transform:uppercase; margin:14px 0 6px;}
 .ov-meta{display:flex; gap:18px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-soft); margin-bottom:26px; letter-spacing:.04em;}
-.ov-hero{width:100%; border:1px solid var(--line); border-radius:var(--r); margin-bottom:8px; background:#0d1a2c; overflow:hidden; box-shadow:var(--shadow-soft);}
-.ov-hero img{width:100%; display:block; max-height:440px; object-fit:cover;}
+.ov-hero{width:100%; border:1px solid var(--line); border-radius:var(--r); margin-bottom:8px; background:#0d1a2c; overflow:hidden; box-shadow:var(--shadow-soft); position:relative;}
+.ov-hero img{width:100%; display:block; height:min(60vh, 520px); object-fit:contain; cursor:zoom-in; background:#0d1a2c;}
+.ov-zoom-hint{
+  position:absolute; bottom:12px; right:12px; z-index:2;
+  background:rgba(255,255,255,0.92); border:1px solid var(--line); border-radius:100px;
+  padding:6px 12px; display:flex; align-items:center; gap:6px;
+  font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.05em; color:var(--ink-soft);
+  pointer-events:none;
+}
+.ov-zoom-hint svg{width:12px; height:12px;}
 .ov-strip{display:flex; gap:8px; margin-bottom:34px; overflow-x:auto; padding-bottom:6px;}
 .ov-strip img{width:88px; height:64px; object-fit:cover; border:1px solid var(--line); border-radius:var(--rs); cursor:pointer; opacity:.6; transition:opacity .2s, border-color .2s;}
 .ov-strip img:hover, .ov-strip img.active{opacity:1; border-color:var(--orange);}
@@ -240,6 +248,36 @@ section{padding:90px 0; position:relative;}
 .ov-block ul{padding-left:18px; margin-bottom:16px;}
 .ov-block{margin-bottom:26px;}
 @media(max-width:700px){ .ov-cols{grid-template-columns:1fr;} .ov-top,.ov-body{padding-left:20px; padding-right:20px;} }
+
+/* ---------------- LIGHTBOX (full-size zoom) ---------------- */
+#lightbox{
+  position:fixed; inset:0; z-index:2000; display:none;
+  background:rgba(8,14,24,0.94); backdrop-filter:blur(4px);
+  align-items:center; justify-content:center; cursor:zoom-out;
+}
+#lightbox.open{display:flex;}
+#lightbox img{
+  max-width:92vw; max-height:92vh; object-fit:contain;
+  box-shadow:0 30px 80px rgba(0,0,0,0.5); border-radius:4px;
+  cursor:default;
+}
+.lb-close{
+  position:absolute; top:22px; right:26px; width:42px; height:42px; border-radius:50%;
+  border:1px solid rgba(255,255,255,0.3); display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:background .2s, transform .2s;
+}
+.lb-close:hover{background:rgba(255,255,255,0.12); transform:rotate(90deg);}
+.lb-close svg{width:18px; height:18px; stroke:var(--sheet);}
+.lb-nav{
+  position:absolute; top:50%; transform:translateY(-50%); width:48px; height:48px; border-radius:50%;
+  border:1px solid rgba(255,255,255,0.3); display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:background .2s; background:rgba(0,0,0,0.2);
+}
+.lb-nav:hover{background:rgba(255,255,255,0.15);}
+.lb-nav svg{width:20px; height:20px; stroke:var(--sheet);}
+.lb-prev{left:26px;}
+.lb-next{right:26px;}
+@media(max-width:700px){ .lb-nav{width:38px; height:38px;} .lb-prev{left:10px;} .lb-next{right:10px;} }
 
 /* ---------------- EXPERIENCE ---------------- */
 .exp-grid{display:grid; grid-template-columns:1fr 280px; gap:50px; align-items:start;}
@@ -382,8 +420,6 @@ footer{padding:26px 0; text-align:center; font-family:'IBM Plex Mono',monospace;
     </div>
     <div class="exp-grid">
       <div class="timeline" id="timelineBody"></div>
-      <!-- EDIT ME: skills/tools list is the `skills` array in the script
-           below (search for "SKILLS / BOM TABLE"). -->
       <div class="skills-box reveal">
         <div class="skills-box-title">Skills &amp; Tools</div>
         <div id="skillsBody"></div>
@@ -393,8 +429,6 @@ footer{padding:26px 0; text-align:center; font-family:'IBM Plex Mono',monospace;
 </section>
 
 <!-- ===================== CONTACT ===================== -->
-<!-- EDIT ME: name/email/phone/LinkedIn fields and the "open to co-op"
-     blurb are all plain text below. -->
 <section id="contact">
   <div class="wrap sec-head reveal" style="margin-bottom:0;">
     <div>
@@ -439,6 +473,20 @@ footer{padding:26px 0; text-align:center; font-family:'IBM Plex Mono',monospace;
       </div>
     </div>
     <div class="ov-body" id="ovBody"></div>
+  </div>
+</div>
+
+<!-- ===================== LIGHTBOX (click a project photo to zoom) ===================== -->
+<div id="lightbox">
+  <div class="lb-close" onclick="closeLightbox(event)">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4L20 20M20 4L4 20"/></svg>
+  </div>
+  <div class="lb-nav lb-prev" onclick="stepLightbox(event,-1)">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg>
+  </div>
+  <img id="lbImg" src="" alt="">
+  <div class="lb-nav lb-next" onclick="stepLightbox(event,1)">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
   </div>
 </div>
 
@@ -675,13 +723,43 @@ projects.forEach((p,i)=>{
   io.observe(card);
 });
 
+let activeStrip = [];
+let activeIndex = 0;
+
+function setMainImage(key, idx){
+  document.getElementById('ovMainImg').src = IMG[key];
+  activeIndex = idx;
+  document.querySelectorAll('#ovStrip img').forEach((x,i)=> x.classList.toggle('active', i===idx));
+  if(document.getElementById('lightbox').classList.contains('open')){
+    document.getElementById('lbImg').src = IMG[key];
+  }
+}
+
+function openLightbox(){
+  document.getElementById('lbImg').src = document.getElementById('ovMainImg').src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox(e){
+  if(e) e.stopPropagation();
+  document.getElementById('lightbox').classList.remove('open');
+}
+function stepLightbox(e, dir){
+  e.stopPropagation();
+  if(!activeStrip.length) return;
+  const next = (activeIndex + dir + activeStrip.length) % activeStrip.length;
+  setMainImage(activeStrip[next], next);
+}
+document.getElementById('lightbox').addEventListener('click', ()=>closeLightbox());
+
 function openProject(p){
   document.getElementById('ovEyebrow').textContent = p.tag;
   const body = document.getElementById('ovBody');
   body.innerHTML = `
     <h2>${p.title}</h2>
     <div class="ov-meta"><span>${p.tags.join(' · ')}</span></div>
-    <div class="ov-hero"><img id="ovMainImg" data-img="${p.hero}" alt="${p.title}"></div>
+    <div class="ov-hero"><img id="ovMainImg" data-img="${p.hero}" alt="${p.title}" onclick="openLightbox()">
+      <div class="ov-zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>CLICK TO ZOOM</div>
+    </div>
     <div class="ov-strip" id="ovStrip"></div>
     <div class="ov-cols">
       <div>
@@ -694,16 +772,15 @@ function openProject(p){
       </div>
     </div>
   `;
+  activeStrip = p.strip;
+  activeIndex = p.strip.indexOf(p.hero);
+  if(activeIndex < 0) activeIndex = 0;
   const strip = document.getElementById('ovStrip');
   p.strip.forEach((key,idx)=>{
     const im = document.createElement('img');
     im.dataset.img = key;
-    if(key===p.hero) im.classList.add('active');
-    im.addEventListener('click', ()=>{
-      document.getElementById('ovMainImg').src = IMG[key];
-      strip.querySelectorAll('img').forEach(x=>x.classList.remove('active'));
-      im.classList.add('active');
-    });
+    if(idx===activeIndex) im.classList.add('active');
+    im.addEventListener('click', ()=> setMainImage(key, idx));
     strip.appendChild(im);
   });
   applyImages();
@@ -714,7 +791,15 @@ function closeOverlay(){
   document.getElementById('overlay').classList.remove('open');
   document.body.style.overflow='';
 }
-document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeOverlay(); });
+document.addEventListener('keydown', (e)=>{
+  if(document.getElementById('lightbox').classList.contains('open')){
+    if(e.key==='Escape') closeLightbox();
+    if(e.key==='ArrowRight') stepLightbox(e,1);
+    if(e.key==='ArrowLeft') stepLightbox(e,-1);
+    return;
+  }
+  if(e.key==='Escape') closeOverlay();
+});
 
 /* ============ EXPERIENCE DATA ============ */
 const experience = [
