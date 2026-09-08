@@ -308,10 +308,6 @@ footer{padding:26px 0; text-align:center; font-family:'IBM Plex Mono',monospace;
 
 <div id="top"></div>
 
-<!-- ===================== HERO ===================== -->
-<!-- EDIT ME: your name and tagline are plain text below.
-     The photo next to it comes from images/hero_photo.jpg — see the IMG list
-     near the top of the second script section if you want to point it elsewhere. -->
 <section id="hero">
   <div class="wrap hero-grid">
     <div>
@@ -337,13 +333,6 @@ footer{padding:26px 0; text-align:center; font-family:'IBM Plex Mono',monospace;
   </div>
 </section>
 
-<!-- ===================== ABOUT ===================== -->
-<!-- EDIT ME: the paragraphs below are plain text. The skills/tools table
-     ("BOM") is generated from the `skills` list further down in the script. -->
-<!-- ===================== PROJECTS ===================== -->
-<!-- EDIT ME: the actual project cards/content are generated from the
-     `projects` list in the script below (search for "PROJECTS DATA").
-     Each project there has a title, blurb, tags, photos, and case-study text. -->
 <section id="projects">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -351,7 +340,7 @@ footer{padding:26px 0; text-align:center; font-family:'IBM Plex Mono',monospace;
         <div class="eyebrow">Sheet 00 — Work</div>
         <h2 class="sec-title">Selected Projects</h2>
       </div>
-    
+     
     </div>
     <div class="grid-projects" id="projectGrid"></div>
   </div>
@@ -382,8 +371,6 @@ footer{padding:26px 0; text-align:center; font-family:'IBM Plex Mono',monospace;
 </section>
 
 <!-- ===================== EXPERIENCE ===================== -->
-<!-- EDIT ME: generated from the `experience` list in the script below
-     (search for "EXPERIENCE DATA"). -->
 <section id="experience">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -391,7 +378,7 @@ footer{padding:26px 0; text-align:center; font-family:'IBM Plex Mono',monospace;
         <div class="eyebrow">Sheet 02 — Process</div>
         <h2 class="sec-title">Experience &amp; Skills</h2>
       </div>
-   
+      <div class="sec-note">ROLES ORDERED MOST-RECENT FIRST. EACH NODE MARKS AN ACTIVE OR COMPLETED ENGAGEMENT.</div>
     </div>
     <div class="exp-grid">
       <div class="timeline" id="timelineBody"></div>
@@ -419,8 +406,8 @@ footer{padding:26px 0; text-align:center; font-family:'IBM Plex Mono',monospace;
   <div class="wrap titleblock">
     <div class="tb-grid reveal">
       <div class="tb-left">
-        <h2>Open to Co-op<br>PEY</h2>
-        <p>Looking for a 12-16‑month mechanical design, manufacturing, motorsport or robotics co-op where I can build real hardware with a real team. If that's you — reach out.</p>
+        <h2>Open to Co-op<br>PEY 2027-28</h2>
+        <p>Looking for a 12-16 month mechanical design, manufacturing, robotics or motorsport co-op where I can build real hardware with a real team. If that's you — reach out.</p>
         <div class="tb-fields">
           <div class="tb-field"><span>Name</span><b>Thenukka Logeswaran</b></div>
           <div class="tb-field"><span>Email</span><a href="mailto:thenukats.24@gmail.com">thenukats.24@gmail.com</a></div>
@@ -429,7 +416,7 @@ footer{padding:26px 0; text-align:center; font-family:'IBM Plex Mono',monospace;
         </div>
       </div>
       <div class="tb-right">
-        <div class="status"><span class="dot"></span>AVAILABLE — PEY 2027-28 CO-OP</div>
+        <div class="status"><span class="dot"></span>AVAILABLE — PEY CO-OP</div>
         <div class="tb-cta">
           <a class="btn" href="mailto:thenukats.24@gmail.com">SEND AN EMAIL →</a>
           <a class="btn ghost" href="https://www.linkedin.com/in/thenukka-l/" target="_blank" rel="noopener">CONNECT ON LINKEDIN ↗</a>
@@ -457,12 +444,7 @@ footer{padding:26px 0; text-align:center; font-family:'IBM Plex Mono',monospace;
 
 <script>
 /* ======================================================================
-   PHOTOS — EDIT ME
-   ----------------------------------------------------------------------
-   Every photo on the site is listed below. To swap a photo, just
-   replace the image file of that name inside the "images" folder
-   (keep the exact same filename), OR change the path on the right
-   to point at a different file/filename.
+   PHOTOS
    ====================================================================== */
 const IMG = {
   // ---- Hero (top of page) ----
@@ -472,7 +454,7 @@ const IMG = {
   "hero_render":      "images/hero_render.jpg",      // FIG. 01 — "Early gear-drive concept model" photo, About section
 
   // ---- Project: Vertical Spinner Combat Robot ----
-  "combat_main":      "images/combat_main.jpg",      // Project card cover photo
+  "combat_main":      "images/combat_main.png",      // Project card cover photo
   "combat_exploded1":  "images/combat_exploded1.jpg", // Extra photo in the project's popup gallery
   "combat_action":    "images/combat_action.jpg",    // Extra photo in the project's popup gallery
   "utra_logo":        "images/utra_logo.jpg",        // Extra photo in the project's popup gallery
@@ -482,35 +464,44 @@ const IMG = {
   "gearbox_drawing":   "images/gearbox_drawing.jpg",  // Extra photo in the project's popup gallery
   "gearbox_proto":     "images/gearbox_proto.jpg",    // Extra photo in the project's popup gallery
   "gearbox_proto2":    "images/gearbox_proto2.jpg",   // Extra photo in the project's popup gallery
+  "gearbox_assembly":  "images/gearbox_assembly.png", // Extra photo in the project's popup gallery
 
   // ---- Project: Robotic Arm for Cinematography ----
-  "arm_main":          "images/arm_main.jpg",         // Project card cover photo
+  "arm_main":          "images/arm_main.png",         // Project card cover photo
   "arm_sketch":        "images/arm_sketch.jpg",        // Extra photo in the project's popup gallery
   "arm_closeup":       "images/arm_closeup.jpg",       // Extra photo in the project's popup gallery
+  "arm_sketch1":       "images/arm_sketch1.png",       // Extra photo in the project's popup gallery
+  "arm_prototype":     "images/arm_prototype.png",     // Extra photo in the project's popup gallery
+  "arm_extended":      "images/arm_extended.png",      // Extra photo in the project's popup gallery
 
   // ---- Project: CIV102 Matboard Bridge ----
   "bridge_render":     "images/bridge_render.jpg",    // Project card cover photo
   "bridge_team":       "images/bridge_team.jpg",      // Extra photo in the project's popup gallery
   "bridge_clamping":   "images/bridge_clamping.jpg",  // Extra photo in the project's popup gallery
   "bridge_graph":      "images/bridge_graph.jpg",     // Extra photo in the project's popup gallery
+  "bridge_construction": "images/bridge_construction.png", // Extra photo in the project's popup gallery
+  "bridge_build":      "images/bridge_build.png",     // Extra photo in the project's popup gallery
+  "bridge_cross_section": "images/bridge_cross_section.png", // Extra photo in the project's popup gallery
+  "bridge_stress_analysis": "images/bride_stress_analysis.png", // Extra photo in the project's popup gallery (filename has a typo — "bride_" — left as-is to match the actual file)
 
   // ---- Project: Bulk Soap Dispensing ----
   "soap_render":       "images/soap_render.jpg",      // Project card cover photo
   "soap_parts":        "images/soap_parts.jpg",       // Extra photo in the project's popup gallery
   "soap_team":         "images/soap_team.jpg",        // Extra photo in the project's popup gallery
-
-  // ---- Project: Reducing Hand Pain in EngSci Students ----
-  "pen_render":        "images/pen_render.jpg",       // Project card cover photo
-  "pen_photo":         "images/pen_photo.jpg",        // Extra photo in the project's popup gallery
+  "soap_prototype":    "images/soap_prototype.jpg",   // Extra photo in the project's popup gallery
+  "soap_main":         "images/soap_main.png",        // Extra photo in the project's popup gallery
+  "soap_measurement_matrix": "images/soap_measurement_matrix.png", // Extra photo in the project's popup gallery
+  "soap_decisions":    "images/soap_decisions.png",   // Extra photo in the project's popup gallery
+  "soap_ngos":         "images/soap_NGOs.png",        // Extra photo in the project's popup gallery
 
   // ---- Project: Cardboard Chair ----
   "chair_render":      "images/chair_render.jpg",     // Project card cover photo
   "chair_photo":       "images/chair_photo.jpg",      // Extra photo in the project's popup gallery
-  "chair_standing":    "images/chair_standing.jpg",   // Extra photo in the project's popup gallery
+  "chair_standing":    "images/chairs.jpg",           // Extra photo in the project's popup gallery
+  "chair_prototype":   "images/chair_prototype.jpg",  // Extra photo in the project's popup gallery
+  "chair_cad":         "images/chair_cad.jpg",        // Extra photo in the project's popup gallery
+  "chair_data":        "images/chair_data.jpg",       // Extra photo in the project's popup gallery
 
-  // ---- Spare / not currently used anywhere on the page ----
-  "harthouse_team":    "images/harthouse_team.jpg",
-  "group_photo":       "images/group_photo.jpg",
 };
 
 </script>
@@ -606,7 +597,7 @@ const projects = [
     id:'gearbox', tag:'MIE243 · FALL 2025', title:'Right-Angle Gearbox',
     blurb:'A fully 3D-printed gearbox with perpendicular offset shafts, a 3:1 reduction, and sub-4-minute assembly.',
     tags:['SolidWorks','3D Printing','DFA'],
-    hero:'gearbox_main', strip:['gearbox_main','gearbox_drawing','gearbox_proto','gearbox_proto2'],
+    hero:'gearbox_main', strip:['gearbox_main','gearbox_drawing','gearbox_proto','gearbox_proto2','gearbox_assembly'],
     role:'Collaborated on gear-train layout, tolerancing, and CAD/BOM coordination with teammates to align fabrication and assembly.',
     goal:'Design a gearbox using only 3D-printed parts (<6hrs print time) with perpendicular offset output shafts, a 3:1 reduction, no worm gears, and under 20 minutes to assemble.',
     choices:['Bevel gears for the perpendicular offset shaft layout, achieving the 3:1 reduction with spur gears.','Locking pins integrated into hubs and shafts to prevent slippage under load.','Open-housing design with minimal part count, cutting assembly time to under 4 minutes.'],
@@ -616,7 +607,7 @@ const projects = [
     id:'arm', tag:'MIE243 · FALL 2025', title:'Robotic Arm for Cinematography',
     blurb:'A 6-DOF camera arm for hobbyist filmmakers — smooth, precise motion for under $5k.',
     tags:['SolidWorks','Motor Selection','Pugh Chart'],
-    hero:'arm_main', strip:['arm_sketch','arm_main','arm_closeup'],
+    hero:'arm_main', strip:['arm_sketch','arm_main','arm_closeup','arm_sketch1','arm_prototype','arm_extended'],
     role:'I owned the vertical arm and shoulder joint — the highest-torque joint in the assembly — from motor selection through motion transmission.',
     goal:'Design a robotic arm accessible to hobbyists, balancing performance and cost while delivering smooth, precise motion for filming (min. 6 DOF, 3kg payload, under $5k).',
     choices:['High-torque precision motor paired with a 50:1 planetary gearbox for the shoulder joint, sized from torque calculations.','Belt-and-pulley motion transmission at 3:1 reduction, moving the motor to the base to lower the center of gravity.','Structured decision-making via a Pugh Chart to evaluate alternatives across the team.'],
@@ -626,7 +617,7 @@ const projects = [
     id:'bridge', tag:'CIV102 · FALL 2024', title:'CIV102 Matboard Bridge',
     blurb:'A 4ft matboard bridge engineered to carry a 400N moving train load across 7 design iterations.',
     tags:['MATLAB','Structural Analysis','Hand Calcs'],
-    hero:'bridge_render', strip:['bridge_render','bridge_team','bridge_clamping','bridge_graph'],
+    hero:'bridge_render', strip:['bridge_render','bridge_team','bridge_clamping','bridge_graph','bridge_construction','bridge_build','bridge_cross_section','bridge_stress_analysis'],
     role:'Ran hand calculations and MATLAB simulations for shear, bending, and buckling; helped build and test the final physical model.',
     goal:'Design a 4ft bridge from matboard that supports a minimum moving train load of 400N while minimizing material use.',
     choices:['Iterated 7 unique cross-sections, shifting material from the base to the top layer each round to reduce compressive-flange buckling risk.','3 layers of matboard on top for strength, plus 5 diaphragms placed to resist bending-moment failure.','MATLAB simulation of shear force vs. shear capacity across the span to catch weak designs before building.'],
@@ -636,27 +627,17 @@ const projects = [
     id:'soap', tag:'PRAXIS II · WINTER 2025', title:'Bulk Soap Dispensing @ Karma Co-op',
     blurb:'A one-button dispensing system that\u2019s 20x faster to start and 7x faster to fill than the existing setup.',
     tags:['Solenoid Valves','User Testing','Requirements Framework'],
-    hero:'soap_render', strip:['soap_render','soap_parts','soap_team'],
+    hero:'soap_render', strip:['soap_render','soap_parts','soap_team','soap_prototype','soap_main','soap_measurement_matrix','soap_decisions','soap_ngos'],
     role:'Helped build and wire the working prototype — solenoid valve, relay switch, and push-button circuit — and ran user testing against our requirements framework.',
     goal:'Design an easy-to-use bulk soap dispensing system with a fast flow rate that adds little strain to Karma Co-op\u2019s existing infrastructure.',
     choices:['Solenoid valve in place of manual shut-off valves — electrically controlled, no extra physical twist mechanism needed.','Relay switch controlling solenoid + air compressor activation, extensible to multiple components at different voltages.','A measurement matrix scored the one-button design against a syringe and impeller-pump alternative — it won on nearly every metric.'],
     reflection:'Working directly with users taught me to prioritize their experience over the "neatest" engineering solution, and to recognize my own biases as a designer.'
   },
   {
-    id:'pen', tag:'PRAXIS I · FALL 2024', title:'Reducing Hand Pain in EngSci Students',
-    blurb:'A hand-pain research study that converged on a null design — because the market had already solved it.',
-    tags:['6-3-5 Brainstorming','SCAMPER','User Testing'],
-    hero:'pen_render', strip:['pen_render','pen_photo'],
-    role:'Defined the design brief, ran secondary research, planned user testing, and helped build/test the glove-brace pen prototype.',
-    goal:'Design or identify a solution that alleviates hand pain and discomfort while writing during exams and lectures.',
-    choices:['6-3-5 brainstorming to generate a wide, unbiased set of early concepts as a team.','SCAMPER to substitute, combine, and modify those concepts — e.g. reducing a full glove brace down to just a ring.','Recommended an existing ergonomic pen rather than a new prototype, once testing showed the need was already well met.'],
-    reflection:'This taught me that framing with research is just as important as diverging with creativity — and that a null result, reached rigorously, is still a real design outcome.'
-  },
-  {
     id:'chair', tag:'HIGH SCHOOL DESIGN', title:'Cardboard Chair',
     blurb:'A tool-free, adhesive-free chair/side-table hybrid built from two sheets of cardboard, sized to anthropometric data.',
     tags:['SketchUp','Anthropometrics','Rapid Prototyping'],
-    hero:'chair_render', strip:['chair_render','chair_photo','chair_standing'],
+    hero:'chair_render', strip:['chair_render','chair_photo','chair_standing','chair_prototype','chair_cad','chair_data'],
     role:'Analyzed anthropometric data, modeled candidate geometries in SketchUp, and built the 1:10 and full-scale prototypes.',
     goal:'Design a chair/stool for a college dorm that doubles as a side table, fits two 36"x36" cardboard sheets, uses no fasteners or adhesive, and assembles in under 20 minutes.',
     choices:['Selected hip breadth and knee height as the driving anthropometric measurements for the 80\u201385th percentile.','Sacrificed a backrest to stay within material limits while keeping the design usable.','Validated structural stability with a 1:10 scale prototype before committing to full-scale fabrication.'],
