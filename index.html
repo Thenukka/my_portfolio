@@ -241,16 +241,6 @@ section{padding:90px 0; position:relative;}
   pointer-events:none;
 }
 .ov-zoom-hint svg{width:12px; height:12px;}
-.zoom-lens{
-  position:absolute; display:none; pointer-events:none; z-index:3;
-  border:2px solid var(--orange); background:rgba(255,255,255,0.3);
-}
-.zoom-result{
-  position:fixed; display:none; z-index:1500; pointer-events:none;
-  width:420px; height:420px; background-repeat:no-repeat; background-color:#0d1a2c;
-  border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow);
-}
-@media(max-width:1100px){ .zoom-lens, .zoom-result{display:none !important;} }
 .ov-strip{display:flex; gap:8px; margin-bottom:34px; overflow-x:auto; padding-bottom:6px;}
 .ov-strip .strip-item{position:relative; flex:none; cursor:pointer;}
 .ov-strip .strip-item img{width:88px; height:64px; object-fit:cover; border:1px solid var(--line); border-radius:var(--rs); opacity:.6; transition:opacity .2s, border-color .2s; display:block;}
@@ -505,9 +495,6 @@ footer{padding:26px 0; text-align:center; font-family:'IBM Plex Mono',monospace;
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
   </div>
 </div>
-
-<!-- Floating magnified view for the hover-zoom lens (desktop only) -->
-<div class="zoom-result" id="zoomResult"></div>
 
 <script>
 /* ======================================================================
@@ -765,7 +752,6 @@ function setMainImage(key, idx){
 }
 
 function setMainVideo(videoId, idx){
-  hideMagnifier();
   document.getElementById('ovMainImg').style.display = 'none';
   document.getElementById('ovZoomHint').style.display = 'none';
   const wrap = document.getElementById('ovVideoWrap');
@@ -776,7 +762,6 @@ function setMainVideo(videoId, idx){
 }
 
 function openLightbox(){
-  hideMagnifier();
   document.getElementById('lbImg').src = document.getElementById('ovMainImg').src;
   document.getElementById('lightbox').classList.add('open');
 }
@@ -796,66 +781,6 @@ function stepLightbox(e, dir){
 }
 document.getElementById('lightbox').addEventListener('click', ()=>closeLightbox());
 
-/* ============ HOVER MAGNIFIER (Amazon-style zoom) ============ */
-const canHoverZoom = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-const LENS_SIZE = 150;
-
-function hideMagnifier(){
-  const lens = document.getElementById('zoomLens');
-  const result = document.getElementById('zoomResult');
-  if(lens) lens.style.display = 'none';
-  if(result) result.style.display = 'none';
-}
-
-function positionZoomResult(img, result){
-  const panelEl = document.querySelector('.ov-panel');
-  if(!panelEl) return false;
-  const panelRect = panelEl.getBoundingClientRect();
-  const imgRect = img.getBoundingClientRect();
-  const resultW = result.offsetWidth, resultH = result.offsetHeight;
-  const left = panelRect.left - resultW - 24;
-  if(left < 12) return false; // not enough room beside the drawer — skip the floating panel
-  result.style.left = left + 'px';
-  let top = imgRect.top;
-  top = Math.max(12, Math.min(top, window.innerHeight - resultH - 12));
-  result.style.top = top + 'px';
-  return true;
-}
-
-function initMagnifier(){
-  if(!canHoverZoom) return; // touch devices rely on click-to-fullscreen instead
-  const img = document.getElementById('ovMainImg');
-  const lens = document.getElementById('zoomLens');
-  const result = document.getElementById('zoomResult');
-  lens.style.width = LENS_SIZE + 'px';
-  lens.style.height = LENS_SIZE + 'px';
-
-  img.addEventListener('mouseenter', ()=>{
-    if(img.style.display === 'none') return;
-    if(!positionZoomResult(img, result)) return;
-    result.style.backgroundImage = `url(${img.src})`;
-    lens.style.display = 'block';
-    result.style.display = 'block';
-  });
-
-  img.addEventListener('mousemove', (e)=>{
-    if(img.style.display === 'none' || lens.style.display === 'none') return;
-    const rect = img.getBoundingClientRect();
-    let x = e.clientX - rect.left - LENS_SIZE/2;
-    let y = e.clientY - rect.top - LENS_SIZE/2;
-    x = Math.max(0, Math.min(x, rect.width - LENS_SIZE));
-    y = Math.max(0, Math.min(y, rect.height - LENS_SIZE));
-    lens.style.left = x + 'px';
-    lens.style.top = y + 'px';
-    const cx = result.offsetWidth / LENS_SIZE;
-    const cy = result.offsetHeight / LENS_SIZE;
-    result.style.backgroundSize = (rect.width * cx) + 'px ' + (rect.height * cy) + 'px';
-    result.style.backgroundPosition = '-' + (x*cx) + 'px -' + (y*cy) + 'px';
-  });
-
-  img.addEventListener('mouseleave', hideMagnifier);
-}
-
 function openProject(p){
   document.getElementById('ovEyebrow').textContent = p.tag;
   const body = document.getElementById('ovBody');
@@ -863,9 +788,8 @@ function openProject(p){
     <h2>${p.title}</h2>
     <div class="ov-meta"><span>${p.tags.join(' · ')}</span></div>
     <div class="ov-hero"><img id="ovMainImg" data-img="${p.hero}" alt="${p.title}" onclick="openLightbox()">
-      <div class="zoom-lens" id="zoomLens"></div>
       <div class="ov-video-wrap" id="ovVideoWrap"></div>
-      <div class="ov-zoom-hint" id="ovZoomHint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>HOVER TO ZOOM · CLICK TO EXPAND</div>
+      <div class="ov-zoom-hint" id="ovZoomHint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>CLICK TO ZOOM</div>
     </div>
     <div class="ov-strip" id="ovStrip"></div>
     <div class="ov-cols">
@@ -909,12 +833,10 @@ function openProject(p){
   applyImages();
   document.getElementById('overlay').classList.add('open');
   document.body.style.overflow='hidden';
-  initMagnifier();
 }
 function closeOverlay(){
   document.getElementById('overlay').classList.remove('open');
   document.body.style.overflow='';
-  hideMagnifier();
 }
 document.addEventListener('keydown', (e)=>{
   if(document.getElementById('lightbox').classList.contains('open')){
