@@ -405,7 +405,7 @@ footer{padding:26px 0; text-align:center; font-family:'IBM Plex Mono',monospace;
       <div class="reveal">
         <p>I'm a second-year Mechanical Engineering student at UofT with a habit of taking things apart to see how they work — then trying to build something better. Most of my time goes into <b>hands-on prototyping</b>: CAD one day, a soldering iron or a bandsaw the next.</p>
         <p>I currently co-lead the <b>UTRA Combat Robotics</b> team's weapon subsystem design, and I've spent the last two years moving through UofT's Praxis design studios, a matboard bridge that had to survive a 400N load, and a robotic camera arm — always chasing the same thing: a solution that's clever <i>and</i> actually manufacturable.</p>
-        <p>Outside the shop, I mentor younger students in CAD and robotics — I spent three years with a FIRST Robotics team teaching the fundamentals I once had to learn myself.</p>
+        <p>Outside the shop, I mentor younger students in CAD and robotics with my FIRST Robotics team, teaching the fundamentals I once had to learn myself.</p>
       </div>
       <div class="photo-block reveal">
         <img data-img="hero_render" alt="CAD render">
@@ -649,7 +649,7 @@ const projects = [
     id:'combat', tag:'UTRA · NOV 2024 — PRESENT', title:'Vertical Spinner Combat Robot',
     blurb:'Co-led design of a modular weapon system for a 3lb combat robot competing at NHRL and BotBrawl.',
     tags:['SolidWorks','3D Printing','Team Lead'],
-    hero:'combat_main', strip:['combat_main','combat_exploded1'],
+    hero:'combat_main', strip:['combat_main', 'combat_damage', {img:'combat_exploded1', caption:'Modular design to ensure easy and quik repairs to drive and weapon subassemblies in between matches.'},'combat_table'],
     role:'Subteam co-lead. I coordinated CAD workflows, documented BOMs, and led design of the weapon and drive modules.',
     goal:'Design a modular, easily-repairable 3lb combat robot capable of surviving high-speed impacts with under 15 minutes between matches.',
     choices:['2WD drivetrain — sacrifices some traction for more weight budget on the weapon system, with interesting gyroscopic effects at speed.','"Drisc" weapon setup — a wide dual-disk configuration spaced by a drum, uncommon at 3lb, giving a larger impact area.','Fully modular drive and weapon modules, swappable with a few screws for fast pit repairs.'],
@@ -659,7 +659,7 @@ const projects = [
     id:'gearbox', tag:'MIE243 · FALL 2025', title:'Right-Angle Gearbox',
     blurb:'A fully 3D-printed gearbox with perpendicular offset shafts, a 3:1 reduction, and sub-4-minute assembly.',
     tags:['SolidWorks','3D Printing','DFA'],
-    hero:'gearbox_main', strip:['gearbox_main','gearbox_drawing', 'gearbox_assembly', 'gearbox_proto','gearbox_proto2'],
+    hero:'gearbox_main', strip:['gearbox_main',{img:'gearbox_drawing', caption:'Assembly of gearbox drawing dont using SolidWorks with BOM'}, 'gearbox_assembly','gearbox_proto2'],
     role:'Collaborated on gear-train layout, tolerancing, and CAD/BOM coordination with teammates to align fabrication and assembly.',
     goal:'Design a gearbox using only 3D-printed parts (<6hrs print time) with perpendicular offset output shafts, a 3:1 reduction, no worm gears, and under 20 minutes to assemble. The gearbox was then load tested through hand cranking and via drill at ~2000 rpm',
     choices:['Bevel gears for the perpendicular offset shaft layout, achieving the 3:1 reduction with spur gears.','Locking pins integrated into hubs and shafts to prevent slippage under load.','Open-housing design with minimal part count, cutting assembly time to under 4 minutes.'],
