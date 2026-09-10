@@ -241,6 +241,7 @@ section{padding:90px 0; position:relative;}
   pointer-events:none;
 }
 .ov-zoom-hint svg{width:12px; height:12px;}
+.ov-caption{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ink-soft); line-height:1.5; padding:10px 2px 18px; letter-spacing:.02em; display:none;}
 .ov-strip{display:flex; gap:8px; margin-bottom:34px; overflow-x:auto; padding-bottom:6px;}
 .ov-strip .strip-item{position:relative; flex:none; cursor:pointer;}
 .ov-strip .strip-item img{width:88px; height:64px; object-fit:cover; border:1px solid var(--line); border-radius:var(--rs); opacity:.6; transition:opacity .2s, border-color .2s; display:block;}
@@ -636,12 +637,13 @@ Object.keys(skillGroups).forEach(cat=>{
 });
 
 /* ============ PROJECTS DATA ============
-   To add a video into a project's popup gallery, drop an object like
-   {video:'dQw4w9WgXcQ'} anywhere inside that project's `strip` array
-   (mixed in alongside the photo keys). The video ID is the part of a
-   YouTube URL after "v=" — e.g. for youtube.com/watch?v=dQw4w9WgXcQ
-   the ID is dQw4w9WgXcQ. It'll show up as a thumbnail with a play
-   icon, and clicking it plays the video right in the frame. ============ */
+   Each project's `strip` array controls its popup gallery. Each entry can be:
+     - a plain key string, e.g. 'combat_action'                — a photo, no caption
+     - {img:'combat_action', caption:'Weapon module mid-test.'} — a photo WITH a caption
+     - {video:'dQw4w9WgXcQ'}                                    — a video (caption optional here too)
+   Captions show up under the big photo/video when that item is selected.
+   A video's ID is the part of its YouTube URL after "v=" — e.g. for
+   youtube.com/watch?v=dQw4w9WgXcQ the ID is dQw4w9WgXcQ. ============ */
 const projects = [
   {
     id:'combat', tag:'UTRA · NOV 2024 — PRESENT', title:'Vertical Spinner Combat Robot',
@@ -749,6 +751,19 @@ function setMainImage(key, idx){
   if(document.getElementById('lightbox').classList.contains('open')){
     document.getElementById('lbImg').src = IMG[key];
   }
+  updateCaption(idx);
+}
+
+function getCaption(idx){
+  const entry = activeStrip[idx];
+  if(!entry || typeof entry === 'string') return null;
+  return entry.caption || null;
+}
+function updateCaption(idx){
+  const capEl = document.getElementById('ovCaption');
+  const cap = getCaption(idx);
+  if(cap){ capEl.textContent = cap; capEl.style.display = 'block'; }
+  else { capEl.textContent = ''; capEl.style.display = 'none'; }
 }
 
 function setMainVideo(videoId, idx){
@@ -759,6 +774,7 @@ function setMainVideo(videoId, idx){
   wrap.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" title="Project video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
   activeIndex = idx;
   document.querySelectorAll('#ovStrip .strip-item').forEach((x,i)=> x.classList.toggle('active', i===idx));
+  updateCaption(idx);
 }
 
 function openLightbox(){
@@ -775,9 +791,13 @@ function stepLightbox(e, dir){
   let next = activeIndex;
   for(let tries=0; tries<activeStrip.length; tries++){
     next = (next + dir + activeStrip.length) % activeStrip.length;
-    if(typeof activeStrip[next] === 'string') break; // skip video entries — lightbox is photos only
+    const entry = activeStrip[next];
+    if(typeof entry === 'string' || entry.img) break; // skip video-only entries — lightbox is photos only
   }
-  if(typeof activeStrip[next] === 'string') setMainImage(activeStrip[next], next);
+  const entry = activeStrip[next];
+  if(typeof entry === 'string' || entry.img){
+    setMainImage(typeof entry === 'string' ? entry : entry.img, next);
+  }
 }
 document.getElementById('lightbox').addEventListener('click', ()=>closeLightbox());
 
@@ -791,6 +811,7 @@ function openProject(p){
       <div class="ov-video-wrap" id="ovVideoWrap"></div>
       <div class="ov-zoom-hint" id="ovZoomHint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>CLICK TO ZOOM</div>
     </div>
+    <div class="ov-caption" id="ovCaption"></div>
     <div class="ov-strip" id="ovStrip"></div>
     <div class="ov-cols">
       <div>
@@ -804,21 +825,24 @@ function openProject(p){
     </div>
   `;
   activeStrip = p.strip;
-  activeIndex = p.strip.indexOf(p.hero);
+  activeIndex = p.strip.findIndex(entry => (typeof entry === 'string' ? entry : entry.img) === p.hero);
   if(activeIndex < 0) activeIndex = 0;
+  updateCaption(activeIndex);
   const strip = document.getElementById('ovStrip');
   p.strip.forEach((entry,idx)=>{
     const item = document.createElement('div');
     item.className = 'strip-item';
     if(idx===activeIndex) item.classList.add('active');
-    if(typeof entry === 'string'){
-      // a normal photo — entry is a key into IMG
+    const isVideo = typeof entry === 'object' && entry.video;
+    if(!isVideo){
+      // a normal photo — entry is either a plain key string, or {img:'key', caption:'...'}
+      const imgKey = typeof entry === 'string' ? entry : entry.img;
       const im = document.createElement('img');
-      im.dataset.img = entry;
+      im.dataset.img = imgKey;
       item.appendChild(im);
-      item.addEventListener('click', ()=> setMainImage(entry, idx));
+      item.addEventListener('click', ()=> setMainImage(imgKey, idx));
     } else {
-      // a video — entry looks like {video:'YOUTUBE_ID'}
+      // a video — entry looks like {video:'YOUTUBE_ID', caption:'...' (optional)}
       const im = document.createElement('img');
       im.src = `https://img.youtube.com/vi/${entry.video}/mqdefault.jpg`;
       item.appendChild(im);
