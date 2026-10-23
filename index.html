@@ -11,10 +11,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ======================================================================
-   COLOURS
+   COLOURS — dark theme. Everything runs off these tokens.
+   Two accent colours:
      --accent  (ice blue)  = buttons, links, labels, hover states
      --accent2 (warm amber) = highlights: surname, "PEY 2027-28", timeline dots, bold words
-   change --accent to something dark, flip --on-accent to #fff.
+   If you change --accent to something dark, flip --on-accent to #fff.
    ====================================================================== */
 :root{
   color-scheme:dark;
@@ -189,7 +190,7 @@ footer .wrap{display:flex; justify-content:center; text-align:center;}
 #overlay{position:fixed; inset:0; z-index:1000; display:none;}
 #overlay.open{display:block;}
 .ov-backdrop{position:absolute; inset:0; background:rgba(0,0,0,0.75); backdrop-filter:blur(4px);}
-.ov-panel{position:absolute; top:0; right:0; height:100%; width:min(1000px, 100vw); background:var(--bg); overflow-y:auto; transform:translateX(100%); transition:transform .45s cubic-bezier(.2,.8,.2,1); border-left:1px solid var(--line); box-shadow:-30px 0 70px -30px rgba(0,0,0,0.8);}
+.ov-panel{position:absolute; top:0; right:0; height:100%; width:min(1080px, 100vw); background:var(--bg); overflow-y:auto; transform:translateX(100%); transition:transform .45s cubic-bezier(.2,.8,.2,1); border-left:1px solid var(--line); box-shadow:-30px 0 70px -30px rgba(0,0,0,0.8);}
 #overlay.open .ov-panel{transform:translateX(0);}
 .ov-top{position:sticky; top:0; background:rgba(10,10,12,0.9); backdrop-filter:blur(12px); border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; padding:16px 40px; z-index:5;}
 .ov-top .eyebrow{margin:0;}
@@ -222,9 +223,53 @@ footer .wrap{display:flex; justify-content:center; text-align:center;}
 .ov-block ul{padding-left:18px; margin-bottom:16px;}
 @media(max-width:700px){ .ov-cols{grid-template-columns:1fr; gap:0;} .ov-top,.ov-body{padding-left:20px; padding-right:20px;} }
 
+/* ---------------- CASE STUDY (inside the panel) ---------------- */
+.ov-overview{font-size:18px; line-height:1.65; color:#C9C9CF; max-width:720px; margin-bottom:34px;}
+.ov-meta-grid{display:grid; grid-template-columns:1fr 1fr 1.2fr 1.6fr; gap:24px; padding:22px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin-bottom:34px;}
+.ov-meta-grid h5{font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:500; margin-bottom:10px;}
+.ov-meta-grid p{font-size:14.5px; line-height:1.5;}
+.ov-stats{display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px; margin-bottom:36px;}
+.ov-stat{background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:20px;}
+.ov-stat b{display:block; font-family:var(--display); font-weight:400; font-size:clamp(26px,3.2vw,38px); letter-spacing:-.02em; color:var(--accent2); line-height:1; margin-bottom:10px;}
+.ov-stat span{font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); line-height:1.4; display:block;}
+.ov-panel section{padding:0;}
+.ov-sec{margin-top:52px;}
+.ov-h4{font-family:var(--mono); font-size:11.5px; font-weight:500; text-transform:uppercase; letter-spacing:.12em; color:var(--accent); margin-bottom:18px; padding-bottom:10px; border-bottom:1px solid var(--line);}
+.ov-choices{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:12px;}
+.ov-choice{border:1px solid var(--line); background:var(--surface); border-radius:var(--r); padding:22px;}
+.ov-choice .num{font-family:var(--mono); font-size:11px; color:var(--accent); letter-spacing:.1em; margin-bottom:14px; display:block;}
+.ov-choice h5{font-family:var(--display); font-weight:400; font-size:22px; line-height:1.15; letter-spacing:-.01em; margin-bottom:10px;}
+.ov-choice p{font-size:14.5px; line-height:1.6; color:var(--muted); margin:0;}
+.ov-part{margin-top:64px;}
+.ov-part-label{font-family:var(--mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent2); margin-bottom:10px;}
+.ov-part h3{font-size:clamp(26px,3.4vw,38px); margin-bottom:22px;}
+.ov-part-body{font-size:16px; line-height:1.7; color:#D2D2D8; max-width:720px; margin-bottom:20px;}
+.ov-figs{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:16px; align-items:start;}
+.ov-fig img{width:100%; display:block; border-radius:var(--r); border:1px solid var(--line); cursor:zoom-in; background:var(--surface);}
+.ov-fig figcaption{font-size:13.5px; line-height:1.6; color:var(--muted); padding-top:10px; max-width:720px;}
+.ov-vid{position:relative; aspect-ratio:16/9; border-radius:var(--r); overflow:hidden; border:1px solid var(--line); background:#000;}
+.ov-vid iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+.ov-tools{border-bottom:1px solid var(--line);}
+.ov-tool{display:grid; grid-template-columns:210px 1fr; gap:24px; padding:18px 0; border-top:1px solid var(--line);}
+.ov-tool b{font-family:var(--mono); font-size:12px; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:var(--accent2); padding-top:2px;}
+.ov-tool p{font-size:15.5px; line-height:1.65; color:#D2D2D8; margin:0;}
+.ov-reflection{font-family:var(--display); font-size:clamp(20px,2.4vw,26px); line-height:1.4; letter-spacing:-.01em; max-width:760px;}
+.ov-next{margin-top:72px; width:100%; text-align:left; background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:26px 28px; cursor:pointer; color:var(--text); font:inherit; display:flex; justify-content:space-between; align-items:center; gap:16px; transition:border-color .25s, background .25s;}
+.ov-next small{display:block; font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:8px;}
+.ov-next strong{font-family:var(--display); font-weight:400; font-size:clamp(22px,2.8vw,32px); letter-spacing:-.01em;}
+.ov-next .arrow{font-size:26px; color:var(--accent); transition:transform .25s;}
+.ov-next:hover{border-color:var(--accent);}
+.ov-next:hover .arrow{transform:translateX(6px);}
+@media(max-width:700px){
+  .ov-meta-grid{grid-template-columns:1fr 1fr;}
+  .ov-tool{grid-template-columns:1fr; gap:8px;}
+  .ov-figs{grid-template-columns:1fr;}
+}
+
 /* ---------------- LIGHTBOX ---------------- */
 #lightbox{position:fixed; inset:0; z-index:2000; display:none; background:rgba(4,4,5,0.96); backdrop-filter:blur(4px); align-items:center; justify-content:center; cursor:zoom-out;}
 #lightbox.open{display:flex;}
+#lightbox.single .lb-nav{display:none;}
 #lightbox img{max-width:92vw; max-height:92vh; object-fit:contain; box-shadow:0 30px 80px rgba(0,0,0,0.5); border-radius:4px; cursor:default;}
 .lb-close{position:absolute; top:22px; right:26px; width:42px; height:42px; border-radius:50%; border:1px solid rgba(255,255,255,0.3); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background .2s, transform .2s;}
 .lb-close:hover{background:rgba(255,255,255,0.12); transform:rotate(90deg);}
@@ -563,66 +608,542 @@ Object.keys(skillGroups).forEach(cat=>{
    A video's ID is the part of its YouTube URL after "v=" — e.g. for
    youtube.com/watch?v=dQw4w9WgXcQ the ID is dQw4w9WgXcQ. ============ */
 const projects = [
-  {
-    id:'combat', wide:true, tag:'UTRA · NOV 2024 — PRESENT', title:'Vertical Spinner Combat Robot',
-    blurb:'Co-led design of a modular weapon system for a 3lb combat robot competing at NHRL and BotBrawl.',
-    tags:['SolidWorks','3D Printing','Team Lead'],
-    hero:'combat_main', strip:['combat_main', {img:'combat_damage', caption: 'Post-match damage analysis before repairs, identified weak points in screw placements, inability to self right and weight balance which caused trouble with driving control'}, {video:'SBcS8LYIARQ'},{img:'combat_exploded1', caption:'Modular design to ensure easy and quik repairs to drive and weapon subassemblies in between matches.'},{img:'combat_v2cad', caption:'Redesign of our robot following our first competition. Reduced the width to save weight and reduce easy access points, also ensured the wheels were able to contact the ground when upside down so we can self-right. Chose to redesign upright ears out of carbon-fiber instead of aluminum to prvent them from bending inwards from impact and blocking the weapon. Added TPU forks to the sides to gain better control when attacking opponent robots.'}, 'combat_table'],
-    role:'Subteam co-lead. I coordinated CAD workflows, documented BOMs, and led design of the weapon and drive modules.',
-    goal:'Design a modular, easily-repairable 3lb combat robot capable of surviving high-speed impacts with under 15 minutes between matches.',
-    choices:['2WD drivetrain — sacrifices some traction for more weight budget on the weapon system, with interesting gyroscopic effects at speed.','"Drisc" weapon setup — a wide dual-disk configuration spaced by a drum, uncommon at 3lb, giving a larger impact area.','Fully modular drive and weapon modules, swappable with a few screws for fast pit repairs.'],
-    reflection:'This strengthened my teamwork and communication skills as I coordinated CAD workflows across the team, and reinforced how much I enjoy designing under real competition pressure and how to design parts for easy 3d printing and laser cut manufacturing.'
-  },
-  {
-    id:'gearbox', tag:'MIE243 · FALL 2025', title:'Right-Angle Gearbox',
-    blurb:'A fully 3D-printed gearbox with perpendicular offset shafts, a 3:1 reduction, and sub-4-minute assembly.',
-    tags:['SolidWorks','3D Printing','DFA'],
-    hero:'gearbox_main', strip:['gearbox_main',  {video:'Gk5NuQAWBTk', caption: 'First printed prototype to test alignment of gears, ease of assembly and other design flaws.'}, {img:'gearbox_drawing', caption:'Assembly of gearbox drawing dont using SolidWorks with BOM'}, 'gearbox_assembly','gearbox_proto2'],
-    role:'Collaborated on gear-train layout, tolerancing, and CAD/BOM coordination with teammates to align fabrication and assembly.',
-    goal:'Design a gearbox using only 3D-printed parts (<6hrs print time) with perpendicular offset output shafts, a 3:1 reduction, no worm gears, and under 20 minutes to assemble. The gearbox was then load tested through hand cranking and via drill at ~2000 rpm',
-    choices:['Bevel gears for the perpendicular offset shaft layout, achieving the 3:1 reduction with spur gears.','Locking pins integrated into hubs and shafts to prevent slippage under load.','Open-housing design with minimal part count, cutting assembly time to under 4 minutes.'],
-    reflection:'This project strengthened my mechanical design and teamwork skills — showing how tolerance analysis and design-for-assembly principles translate CAD models into functional prototypes.'
-  },
-  {
-    id:'arm', tag:'MIE243 · FALL 2025', title:'Robotic Arm for Cinematography',
-    blurb:'A 6-DOF camera arm for hobbyist filmmakers — smooth, precise, repeatable motion for under $5k.',
-    tags:['SolidWorks','Motor Selection','Decision Matrix'],
-    hero:'arm_main', strip:['arm_main','arm_closeup', 'arm_prototype','arm_sketch','arm_extended'],
-    role:'I owned the vertical arm and shoulder joint — the highest-torque joint in the assembly — from motor selection through motion transmission to ensure stable and repeatable camera motion.',
-    goal:'Design a robotic arm accessible to hobbyists, balancing performance and cost while delivering smooth, precise motion for filming (min. 6 DOF, 3kg payload, under $5k).',
-    choices:['High-torque precision motor paired with a 50:1 planetary gearbox for the shoulder joint, sized from torque calculations.','Belt-and-pulley motion transmission at 3:1 reduction, moving the motor to the base to lower the center of gravity.','Structured decision-making via a Pugh Chart to evaluate alternatives across the team.'],
-    reflection:'This project simulated a real engineering design process — the challenges and importance of collaboration in large team projects, and how drawings and sketches are essential tools for communicating ideas clearly.'
-  },
-  {
-    id:'bridge', tag:'CIV102 · FALL 2024', title:'CIV102 Matboard Bridge',
-    blurb:'A 4ft matboard bridge engineered to carry a 400N moving train load across 7 design iterations.',
-    tags:['MATLAB','Structural Analysis','Hand Calcs'],
-    hero:'bridge_construction', strip:['bridge_clamping','bridge_construction','bridge_build','bridge_cross_section','bridge_stress_analysis'],
-    role:'Ran hand calculations and MATLAB simulations for shear, bending, and buckling; helped build and test the final physical model.',
-    goal:'Design a 4ft bridge from matboard that supports a minimum moving train load of 400N while minimizing material use.',
-    choices:['Iterated 7 unique cross-sections, shifting material from the base to the top layer each round to reduce compressive-flange buckling risk.','3 layers of matboard on top for strength, plus 5 diaphragms placed to resist bending-moment failure.','MATLAB simulation of shear force vs. shear capacity across the span to catch weak designs before building.'],
-    reflection:'The prototype didn’t meet the predicted load — diaphragms should have been concentrated nearer the ends, where bending moments peak. It taught me to trust quantitative models while still questioning their assumptions.'
-  },
-  {
-    id:'soap', tag:'PRAXIS II · WINTER 2025', title:'Bulk Soap Dispensing @ Karma Co-op',
-    blurb:'A one-button dispensing system that’s 20x faster to start and 7x faster to fill than the existing setup.',
-    tags:['Solenoid Valves','User Testing','Requirements Framework'],
-    hero:'soap_render', strip:['soap_render','soap_prototype','soap_main','soap_measurement_matrix','soap_ngos'],
-    role:'Helped build and wire the working prototype — solenoid valve, relay switch, and push-button circuit — and ran user testing against our requirements framework.',
-    goal:'Design an easy-to-use bulk soap dispensing system with a fast flow rate that adds little strain to Karma Co-op’s existing infrastructure and help reduce wastage and spilling.',
-    choices:['Solenoid valve in place of manual shut-off valves — electrically controlled, no extra physical twist mechanism needed.','Relay switch controlling solenoid + air compressor activation, extensible to multiple components at different voltages.','A measurement matrix scored the one-button design against a syringe and impeller-pump alternative — it won on nearly every metric.'],
-    reflection:'Working directly with users taught me to prioritize their experience over the "neatest" or "coolest" engineering solution, and to recognize my own biases as a designer.'
-  },
-  {
-    id:'chair', wide:true, tag:'HIGH SCHOOL DESIGN', title:'Cardboard Chair',
-    blurb:'A tool-free, adhesive-free chair/side-table hybrid built from two sheets of cardboard, sized to anthropometric data.',
-    tags:['SketchUp','Anthropometrics','Rapid Prototyping'],
-    hero:'chair_standing', strip:['chair_render','chair_photo','chair_standing','chair_prototype',{img:'chair_cad', caption:'Brainstoriming ideas using SketchUp to meet data and fit within allocated material restrictions. Helped visually identify initial concept idea flaws related to material and strength'},'chair_data'],
-    role:'Analyzed anthropometric data, modeled candidate geometries in SketchUp, and built the 1:10 and full-scale prototypes. Created a build intrsuction manual to clearly communicate assembly steps.',
-    goal:'Design a chair/stool for a college dorm that doubles as a side table, fits two 36"x36" cardboard sheets, uses no fasteners or adhesive, and assembles in under 20 minutes.',
-    choices:['Selected hip breadth and knee height as the driving anthropometric measurements for the 80–85th percentile.','Sacrificed a backrest to stay within material limits while keeping the design usable.','Validated structural stability with a 1:10 scale prototype before committing to full-scale fabrication.'],
-    reflection:'My first real introduction to industrial design — translating anthropometric data into a practical, functional product under strict material constraints.'
-  },
+ {
+  "id": "combat",
+  "wide": true,
+  "tag": "UTRA · NOV 2024 — PRESENT",
+  "title": "Vertical Spinner Combat Robot",
+  "blurb": "Co-led design of a modular weapon system for a 3lb combat robot competing at NHRL and BotBrawl.",
+  "tags": [
+   "SolidWorks",
+   "3D Printing",
+   "Team Lead"
+  ],
+  "hero": "combat_main",
+  "strip": [
+   "combat_main",
+   {
+    "img": "combat_damage",
+    "caption": "Post-match damage analysis before repairs, identified weak points in screw placements, inability to self right and weight balance which caused trouble with driving control"
+   },
+   {
+    "video": "SBcS8LYIARQ"
+   },
+   {
+    "img": "combat_exploded1",
+    "caption": "Modular design to ensure easy and quick repairs to drive and weapon subassemblies in between matches."
+   },
+   {
+    "img": "combat_v2cad",
+    "caption": "Redesign of our robot following our first competition. Reduced the width to save weight and reduce easy access points, also ensured the wheels were able to contact the ground when upside down so we can self-right. Chose to redesign upright ears out of carbon-fiber instead of aluminum to prevent them from bending inwards from impact and blocking the weapon. Added TPU forks to the sides to gain better control when attacking opponent robots."
+   },
+   "combat_table"
+  ],
+  "roleTitle": "Subteam co-lead",
+  "context": "UTRA Combat Robotics (club team)",
+  "timeline": "Nov 2024 — Present",
+  "stats": [
+   [
+    "3 lb",
+    "Weight class"
+   ],
+   [
+    "< 15 min",
+    "Repair window between matches"
+   ],
+   [
+    "NHRL + BotBrawl",
+    "Competitions"
+   ]
+  ],
+  "role": "Subteam co-lead. I coordinated CAD workflows, documented BOMs, and led design of the weapon and drive modules.",
+  "goal": "Design a modular, easily-repairable 3lb combat robot capable of surviving high-speed impacts with under 15 minutes between matches.",
+  "choices": [
+   "2WD drivetrain — sacrifices some traction for more weight budget on the weapon system, with interesting gyroscopic effects at speed.",
+   "\"Drisc\" weapon setup — a wide dual-disk configuration spaced by a drum, uncommon at 3lb, giving a larger impact area.",
+   "Fully modular drive and weapon modules, swappable with a few screws for fast pit repairs."
+  ],
+  "parts": [
+   {
+    "title": "Modular Design",
+    "figs": [
+     {
+      "img": "combat_exploded1",
+      "caption": "Modular design to ensure easy and quick repairs to drive and weapon subassemblies in between matches."
+     }
+    ]
+   },
+   {
+    "title": "Competition & Damage Analysis",
+    "figs": [
+     {
+      "img": "combat_damage",
+      "caption": "Post-match damage analysis before repairs, identified weak points in screw placements, inability to self right and weight balance which caused trouble with driving control"
+     }
+    ]
+   },
+   {
+    "title": "Redesign",
+    "figs": [
+     {
+      "img": "combat_v2cad",
+      "caption": "Redesign of our robot following our first competition. Reduced the width to save weight and reduce easy access points, also ensured the wheels were able to contact the ground when upside down so we can self-right. Chose to redesign upright ears out of carbon-fiber instead of aluminum to prevent them from bending inwards from impact and blocking the weapon. Added TPU forks to the sides to gain better control when attacking opponent robots."
+     }
+    ]
+   }
+  ],
+  "tools": [
+   [
+    "SolidWorks",
+    "CAD for the weapon and drive modules. I coordinated CAD workflows, documented BOMs and maintained revision history across the team."
+   ],
+   [
+    "Design for manufacture",
+    "Designed parts for easy 3D printing and laser-cut manufacturing, so broken parts could be reprinted or recut between matches. Added TPU side forks for better control when attacking opponents."
+   ],
+   [
+    "Carbon fiber",
+    "Redesigned the upright ears in carbon fiber instead of aluminum so impacts stop bending them inwards into the weapon."
+   ]
+  ],
+  "reflection": "This strengthened my teamwork and communication skills as I coordinated CAD workflows across the team, and reinforced how much I enjoy designing under real competition pressure and how to design parts for easy 3d printing and laser cut manufacturing."
+ },
+ {
+  "id": "gearbox",
+  "tag": "MIE243 · FALL 2025",
+  "title": "Right-Angle Gearbox",
+  "blurb": "A fully 3D-printed gearbox with perpendicular offset shafts, a 3:1 reduction, and sub-4-minute assembly.",
+  "tags": [
+   "SolidWorks",
+   "3D Printing",
+   "DFA"
+  ],
+  "hero": "gearbox_main",
+  "strip": [
+   "gearbox_main",
+   {
+    "video": "Gk5NuQAWBTk",
+    "caption": "First printed prototype to test alignment of gears, ease of assembly and other design flaws."
+   },
+   {
+    "img": "gearbox_drawing",
+    "caption": "Assembly of gearbox drawing done using SolidWorks with BOM"
+   },
+   "gearbox_assembly",
+   "gearbox_proto2"
+  ],
+  "roleTitle": "Mechanical design (team)",
+  "context": "MIE243 course project",
+  "timeline": "Fall 2025",
+  "stats": [
+   [
+    "3:1",
+    "Reduction"
+   ],
+   [
+    "< 4 min",
+    "Assembly time"
+   ],
+   [
+    "~2000 rpm",
+    "Drill load test"
+   ]
+  ],
+  "role": "Collaborated on gear-train layout, tolerancing, and CAD/BOM coordination with teammates to align fabrication and assembly.",
+  "goal": "Design a gearbox using only 3D-printed parts (<6hrs print time) with perpendicular offset output shafts, a 3:1 reduction, no worm gears, and under 20 minutes to assemble. The gearbox was then load tested through hand cranking and via drill at ~2000 rpm",
+  "choices": [
+   "Bevel gears for the perpendicular offset shaft layout, achieving the 3:1 reduction with spur gears.",
+   "Locking pins integrated into hubs and shafts to prevent slippage under load.",
+   "Open-housing design with minimal part count, cutting assembly time to under 4 minutes."
+  ],
+  "parts": [
+   {
+    "title": "Design & Documentation",
+    "figs": [
+     {
+      "img": "gearbox_assembly"
+     },
+     {
+      "img": "gearbox_drawing",
+      "caption": "Assembly of gearbox drawing done using SolidWorks with BOM"
+     }
+    ]
+   },
+   {
+    "title": "Prototype & Testing",
+    "figs": [
+     {
+      "video": "Gk5NuQAWBTk",
+      "caption": "First printed prototype to test alignment of gears, ease of assembly and other design flaws."
+     },
+     {
+      "img": "gearbox_proto2"
+     }
+    ]
+   }
+  ],
+  "tools": [
+   [
+    "SolidWorks",
+    "Gear-train layout, tolerancing, and the assembly drawing with BOM."
+   ],
+   [
+    "3D printing (FDM)",
+    "Every part printed, within a 6-hour print-time limit, with locking pins integrated into the hubs and shafts."
+   ],
+   [
+    "Design for assembly",
+    "Open housing and minimal part count, bringing assembly under 4 minutes against a 20-minute limit."
+   ],
+   [
+    "Load testing",
+    "Hand cranking, then driven with a drill at ~2000 rpm."
+   ]
+  ],
+  "reflection": "This project strengthened my mechanical design and teamwork skills — showing how tolerance analysis and design-for-assembly principles translate CAD models into functional prototypes."
+ },
+ {
+  "id": "arm",
+  "tag": "MIE243 · FALL 2025",
+  "title": "Robotic Arm for Cinematography",
+  "blurb": "A 6-DOF camera arm for hobbyist filmmakers — smooth, precise, repeatable motion for under $5k.",
+  "tags": [
+   "SolidWorks",
+   "Motor Selection",
+   "Decision Matrix"
+  ],
+  "hero": "arm_main",
+  "strip": [
+   "arm_main",
+   "arm_closeup",
+   "arm_prototype",
+   "arm_sketch",
+   "arm_extended"
+  ],
+  "roleTitle": "Vertical arm & shoulder joint",
+  "context": "MIE243 course project (large team)",
+  "timeline": "Fall 2025",
+  "stats": [
+   [
+    "6 DOF",
+    "Minimum"
+   ],
+   [
+    "3 kg",
+    "Payload"
+   ],
+   [
+    "< $5k",
+    "Budget"
+   ]
+  ],
+  "role": "I owned the vertical arm and shoulder joint — the highest-torque joint in the assembly — from motor selection through motion transmission to ensure stable and repeatable camera motion.",
+  "goal": "Design a robotic arm accessible to hobbyists, balancing performance and cost while delivering smooth, precise motion for filming (min. 6 DOF, 3kg payload, under $5k).",
+  "choices": [
+   "High-torque precision motor paired with a 50:1 planetary gearbox for the shoulder joint, sized from torque calculations.",
+   "Belt-and-pulley motion transmission at 3:1 reduction, moving the motor to the base to lower the center of gravity.",
+   "Structured decision-making via a Pugh Chart to evaluate alternatives across the team."
+  ],
+  "parts": [
+   {
+    "title": "Concept",
+    "figs": [
+     {
+      "img": "arm_sketch"
+     }
+    ]
+   },
+   {
+    "title": "Development",
+    "figs": [
+     {
+      "img": "arm_prototype"
+     },
+     {
+      "img": "arm_closeup"
+     },
+     {
+      "img": "arm_extended"
+     }
+    ]
+   }
+  ],
+  "tools": [
+   [
+    "SolidWorks",
+    "CAD for the vertical arm and shoulder joint, the highest-torque joint in the assembly."
+   ],
+   [
+    "Motor & transmission sizing",
+    "Motor chosen from torque calculations, paired with a 50:1 planetary gearbox, then a 3:1 belt-and-pulley with the motor moved to the base to lower the center of gravity."
+   ],
+   [
+    "Pugh chart",
+    "Used to evaluate alternatives across the team."
+   ],
+   [
+    "Sketching",
+    "Drawings and sketches to communicate ideas clearly across a large team."
+   ]
+  ],
+  "reflection": "This project simulated a real engineering design process — the challenges and importance of collaboration in large team projects, and how drawings and sketches are essential tools for communicating ideas clearly."
+ },
+ {
+  "id": "bridge",
+  "tag": "CIV102 · FALL 2024",
+  "title": "CIV102 Matboard Bridge",
+  "blurb": "A 4ft matboard bridge engineered to carry a 400N moving train load across 7 design iterations.",
+  "tags": [
+   "MATLAB",
+   "Structural Analysis",
+   "Hand Calcs"
+  ],
+  "hero": "bridge_construction",
+  "strip": [
+   "bridge_clamping",
+   "bridge_construction",
+   "bridge_build",
+   "bridge_cross_section",
+   "bridge_stress_analysis"
+  ],
+  "roleTitle": "Analysis & build",
+  "context": "CIV102 course project",
+  "timeline": "Fall 2024",
+  "stats": [
+   [
+    "400 N",
+    "Moving train load"
+   ],
+   [
+    "7",
+    "Cross-section iterations"
+   ],
+   [
+    "4 ft",
+    "Span"
+   ]
+  ],
+  "role": "Ran hand calculations and MATLAB simulations for shear, bending, and buckling; helped build and test the final physical model.",
+  "goal": "Design a 4ft bridge from matboard that supports a minimum moving train load of 400N while minimizing material use.",
+  "choices": [
+   "Iterated 7 unique cross-sections, shifting material from the base to the top layer each round to reduce compressive-flange buckling risk.",
+   "3 layers of matboard on top for strength, plus 5 diaphragms placed to resist bending-moment failure.",
+   "MATLAB simulation of shear force vs. shear capacity across the span to catch weak designs before building."
+  ],
+  "parts": [
+   {
+    "title": "Analysis & Iteration",
+    "figs": [
+     {
+      "img": "bridge_cross_section"
+     },
+     {
+      "img": "bridge_stress_analysis"
+     }
+    ]
+   },
+   {
+    "title": "Build & Test",
+    "figs": [
+     {
+      "img": "bridge_clamping"
+     },
+     {
+      "img": "bridge_construction"
+     },
+     {
+      "img": "bridge_build"
+     }
+    ]
+   }
+  ],
+  "tools": [
+   [
+    "MATLAB",
+    "Simulated shear force vs. shear capacity across the span to catch weak designs before building."
+   ],
+   [
+    "Hand calculations",
+    "Shear, bending, and buckling checks, repeated across 7 cross-section iterations."
+   ],
+   [
+    "Physical build & test",
+    "Helped build and test the final matboard model against the predicted load."
+   ]
+  ],
+  "reflection": "The prototype didn’t meet the predicted load — diaphragms should have been concentrated nearer the ends, where bending moments peak. It taught me to trust quantitative models while still questioning their assumptions."
+ },
+ {
+  "id": "soap",
+  "tag": "PRAXIS II · WINTER 2025",
+  "title": "Bulk Soap Dispensing @ Karma Co-op",
+  "blurb": "A one-button dispensing system that’s 20x faster to start and 7x faster to fill than the existing setup.",
+  "tags": [
+   "Solenoid Valves",
+   "User Testing",
+   "Requirements Framework"
+  ],
+  "hero": "soap_render",
+  "strip": [
+   "soap_render",
+   "soap_prototype",
+   "soap_main",
+   "soap_measurement_matrix",
+   "soap_ngos"
+  ],
+  "roleTitle": "Prototype build & user testing",
+  "context": "Praxis II design studio, for Karma Co-op",
+  "timeline": "Winter 2025",
+  "stats": [
+   [
+    "20×",
+    "Faster to start"
+   ],
+   [
+    "7×",
+    "Faster to fill"
+   ],
+   [
+    "3",
+    "Concepts scored"
+   ]
+  ],
+  "role": "Helped build and wire the working prototype — solenoid valve, relay switch, and push-button circuit — and ran user testing against our requirements framework.",
+  "goal": "Design an easy-to-use bulk soap dispensing system with a fast flow rate that adds little strain to Karma Co-op’s existing infrastructure and help reduce wastage and spilling.",
+  "choices": [
+   "Solenoid valve in place of manual shut-off valves — electrically controlled, no extra physical twist mechanism needed.",
+   "Relay switch controlling solenoid + air compressor activation, extensible to multiple components at different voltages.",
+   "A measurement matrix scored the one-button design against a syringe and impeller-pump alternative — it won on nearly every metric."
+  ],
+  "parts": [
+   {
+    "title": "Concept & Evaluation",
+    "figs": [
+     {
+      "img": "soap_measurement_matrix"
+     }
+    ]
+   },
+   {
+    "title": "Prototype",
+    "figs": [
+     {
+      "img": "soap_prototype"
+     }
+    ]
+   }
+  ],
+  "tools": [
+   [
+    "Solenoid valve & relay circuit",
+    "Built and wired the prototype: a solenoid valve, relay switch and push-button circuit, with the relay also triggering the air compressor."
+   ],
+   [
+    "Measurement matrix",
+    "Scored the one-button design against a syringe and an impeller-pump alternative; it won on nearly every metric."
+   ],
+   [
+    "User testing",
+    "Tested the prototype with users against our requirements framework."
+   ]
+  ],
+  "reflection": "Working directly with users taught me to prioritize their experience over the \"neatest\" or \"coolest\" engineering solution, and to recognize my own biases as a designer."
+ },
+ {
+  "id": "chair",
+  "wide": true,
+  "tag": "HIGH SCHOOL DESIGN",
+  "title": "Cardboard Chair",
+  "blurb": "A tool-free, adhesive-free chair/side-table hybrid built from two sheets of cardboard, sized to anthropometric data.",
+  "tags": [
+   "SketchUp",
+   "Anthropometrics",
+   "Rapid Prototyping"
+  ],
+  "hero": "chair_standing",
+  "strip": [
+   "chair_render",
+   "chair_photo",
+   "chair_standing",
+   "chair_prototype",
+   {
+    "img": "chair_cad",
+    "caption": "Brainstorming ideas using SketchUp to meet data and fit within allocated material restrictions. Helped visually identify initial concept idea flaws related to material and strength"
+   },
+   "chair_data"
+  ],
+  "roleTitle": "Design & prototyping",
+  "context": "High school design project",
+  "timeline": "High school",
+  "stats": [
+   [
+    "2",
+    "Cardboard sheets"
+   ],
+   [
+    "0",
+    "Fasteners or adhesive"
+   ],
+   [
+    "< 20 min",
+    "Assembly"
+   ],
+   [
+    "1:10",
+    "Scale prototype"
+   ]
+  ],
+  "role": "Analyzed anthropometric data, modeled candidate geometries in SketchUp, and built the 1:10 and full-scale prototypes. Created a build instruction manual to clearly communicate assembly steps.",
+  "goal": "Design a chair/stool for a college dorm that doubles as a side table, fits two 36\"x36\" cardboard sheets, uses no fasteners or adhesive, and assembles in under 20 minutes.",
+  "choices": [
+   "Selected hip breadth and knee height as the driving anthropometric measurements for the 80–85th percentile.",
+   "Sacrificed a backrest to stay within material limits while keeping the design usable.",
+   "Validated structural stability with a 1:10 scale prototype before committing to full-scale fabrication."
+  ],
+  "parts": [
+   {
+    "title": "Concept & Data",
+    "figs": [
+     {
+      "img": "chair_data"
+     },
+     {
+      "img": "chair_cad",
+      "caption": "Brainstorming ideas using SketchUp to meet data and fit within allocated material restrictions. Helped visually identify initial concept idea flaws related to material and strength"
+     }
+    ]
+   },
+   {
+    "title": "Prototype & Build",
+    "figs": [
+     {
+      "img": "chair_prototype"
+     },
+     {
+      "img": "chair_photo"
+     },
+     {
+      "img": "chair_standing"
+     }
+    ]
+   }
+  ],
+  "tools": [
+   [
+    "Anthropometric data",
+    "Selected hip breadth and knee height as the driving measurements, for the 80–85th percentile."
+   ],
+   [
+    "SketchUp",
+    "Modeled candidate geometries to meet the data within the material limits, and to spot material and strength flaws early."
+   ],
+   [
+    "Prototyping",
+    "Validated stability with a 1:10 scale prototype before building full scale, and wrote a build instruction manual for assembly."
+   ]
+  ],
+  "reflection": "My first real introduction to industrial design — translating anthropometric data into a practical, functional product under strict material constraints."
+ }
 ];
 
 const projectGrid = document.getElementById('projectGrid');
@@ -691,15 +1212,17 @@ function setMainVideo(videoId, idx){
 }
 
 function openLightbox(){
+  document.getElementById('lightbox').classList.remove('single');
   document.getElementById('lbImg').src = document.getElementById('ovMainImg').src;
   document.getElementById('lightbox').classList.add('open');
 }
 function closeLightbox(e){
   if(e) e.stopPropagation();
-  document.getElementById('lightbox').classList.remove('open');
+  document.getElementById('lightbox').classList.remove('open','single');
 }
 function stepLightbox(e, dir){
   e.stopPropagation();
+  if(document.getElementById('lightbox').classList.contains('single')) return;
   if(!activeStrip.length) return;
   let next = activeIndex;
   for(let tries=0; tries<activeStrip.length; tries++){
@@ -714,13 +1237,49 @@ function stepLightbox(e, dir){
 }
 document.getElementById('lightbox').addEventListener('click', ()=>closeLightbox());
 
+function splitChoice(c){
+  const i = c.indexOf(' — ');
+  if(i > 0){ const d = c.slice(i+3); return {t:c.slice(0,i), d:d.charAt(0).toUpperCase()+d.slice(1)}; }
+  return {t:null, d:c};
+}
+function figHTML(f, title){
+  const cap = f.caption ? `<figcaption>${f.caption}</figcaption>` : '';
+  if(f.video){
+    return `<figure class="ov-fig"><div class="ov-vid"><iframe src="https://www.youtube.com/embed/${f.video}" title="Project video" loading="lazy" allowfullscreen></iframe></div>${cap}</figure>`;
+  }
+  return `<figure class="ov-fig"><img data-img="${f.img}" alt="${(f.caption||title).replace(/"/g,'&quot;')}" loading="lazy" onclick="openLightboxSrc(this.src)">${cap}</figure>`;
+}
 function openProject(p){
-  lastFocus = document.activeElement;
+  if(!document.getElementById('overlay').classList.contains('open')) lastFocus = document.activeElement;
+  const idx = projects.indexOf(p);
+  const next = projects[(idx+1) % projects.length];
   document.getElementById('ovEyebrow').textContent = p.tag;
   const body = document.getElementById('ovBody');
+  const meta = [
+    p.roleTitle ? ['Role', `<p>${p.roleTitle}</p>`] : null,
+    p.timeline  ? ['Timeline', `<p>${p.timeline}</p>`] : null,
+    p.context   ? ['Context', `<p>${p.context}</p>`] : null,
+    ['Skills', `<div class="skill-chips">${p.tags.map(t=>`<span class="chip">${t}</span>`).join('')}</div>`],
+  ].filter(Boolean);
+  const stats = (p.stats||[]).map(s=>`<div class="ov-stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('');
+  const choices = p.choices.map((c,k)=>{ const s = splitChoice(c); return `<div class="ov-choice"><span class="num">${String(k+1).padStart(2,'0')}</span>${s.t?`<h5>${s.t}</h5>`:''}<p>${s.d}</p></div>`; }).join('');
+  const parts = (p.parts||[]).map((pt,k)=>`
+    <section class="ov-part">
+      <div class="ov-part-label">Part ${k+1}</div>
+      <h3>${pt.title}</h3>
+      ${pt.body ? `<p class="ov-part-body">${pt.body}</p>` : ''}
+      <div class="ov-figs">${(pt.figs||[]).map(f=>figHTML(f,p.title)).join('')}</div>
+    </section>`).join('');
+  const tools = (p.tools||[]).length ? `
+    <section class="ov-sec">
+      <h4 class="ov-h4">Tools &amp; Methods</h4>
+      <div class="ov-tools">${p.tools.map(t=>`<div class="ov-tool"><b>${t[0]}</b><p>${t[1]}</p></div>`).join('')}</div>
+    </section>` : '';
   body.innerHTML = `
     <h2>${p.title}</h2>
-    <div class="ov-meta">${p.tags.join(' · ')}</div>
+    <p class="ov-overview">${p.blurb}</p>
+    <div class="ov-meta-grid">${meta.map(m=>`<div><h5>${m[0]}</h5>${m[1]}</div>`).join('')}</div>
+    ${stats ? `<div class="ov-stats">${stats}</div>` : ''}
     <div class="ov-hero"><img id="ovMainImg" data-img="${p.hero}" alt="${p.title}" onclick="openLightbox()">
       <div class="ov-video-wrap" id="ovVideoWrap"></div>
       <div class="ov-zoom-hint" id="ovZoomHint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>CLICK TO ZOOM</div>
@@ -728,36 +1287,41 @@ function openProject(p){
     <div class="ov-caption" id="ovCaption"></div>
     <div class="ov-strip" id="ovStrip"></div>
     <div class="ov-cols">
-      <div>
-        <div class="ov-block"><h4>Opportunity / Goal</h4><p>${p.goal}</p></div>
-        <div class="ov-block"><h4>My Role</h4><p>${p.role}</p></div>
-      </div>
-      <div>
-        <div class="ov-block"><h4>Key Design Choices</h4><ul>${p.choices.map(c=>`<li>${c}</li>`).join('')}</ul></div>
-        <div class="ov-block"><h4>Reflection</h4><p>${p.reflection}</p></div>
-      </div>
+      <div class="ov-block"><h4>The Problem</h4><p>${p.goal}</p></div>
+      <div class="ov-block"><h4>My Role</h4><p>${p.role}</p></div>
     </div>
+    <section class="ov-sec">
+      <h4 class="ov-h4">Key Design Choices</h4>
+      <div class="ov-choices">${choices}</div>
+    </section>
+    ${parts}
+    ${tools}
+    <section class="ov-sec">
+      <h4 class="ov-h4">Reflection</h4>
+      <p class="ov-reflection">${p.reflection}</p>
+    </section>
+    <button class="ov-next" onclick="openProject(projects[${(idx+1)%projects.length}])">
+      <span><small>Next project</small><strong>${next.title}</strong></span><span class="arrow">→</span>
+    </button>
   `;
   activeStrip = p.strip;
   activeIndex = p.strip.findIndex(entry => (typeof entry === 'string' ? entry : entry.img) === p.hero);
   if(activeIndex < 0) activeIndex = 0;
   updateCaption(activeIndex);
   const strip = document.getElementById('ovStrip');
-  p.strip.forEach((entry,idx)=>{
+  p.strip.forEach((entry,i)=>{
     const item = document.createElement('div');
     item.className = 'strip-item';
-    if(idx===activeIndex) item.classList.add('active');
+    if(i===activeIndex) item.classList.add('active');
     const isVideo = typeof entry === 'object' && entry.video;
     if(!isVideo){
-      // a normal photo — entry is either a plain key string, or {img:'key', caption:'...'}
       const imgKey = typeof entry === 'string' ? entry : entry.img;
       const im = document.createElement('img');
       im.dataset.img = imgKey;
       im.alt = '';
       item.appendChild(im);
-      item.addEventListener('click', ()=> setMainImage(imgKey, idx));
+      item.addEventListener('click', ()=> setMainImage(imgKey, i));
     } else {
-      // a video — entry looks like {video:'YOUTUBE_ID', caption:'...' (optional)}
       const im = document.createElement('img');
       im.src = `https://img.youtube.com/vi/${entry.video}/mqdefault.jpg`;
       im.alt = '';
@@ -766,20 +1330,24 @@ function openProject(p){
       badge.className = 'play-badge';
       badge.innerHTML = '<span><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg></span>';
       item.appendChild(badge);
-      item.addEventListener('click', ()=> setMainVideo(entry.video, idx));
+      item.addEventListener('click', ()=> setMainVideo(entry.video, i));
     }
     strip.appendChild(item);
   });
   applyImages();
   document.getElementById('overlay').classList.add('open');
-  document.getElementById('ovBody').parentElement.scrollTop = 0;
+  document.querySelector('.ov-panel').scrollTop = 0;
   document.body.style.overflow='hidden';
   document.getElementById('ovClose').focus({preventScroll:true});
+}
+function openLightboxSrc(src){
+  document.getElementById('lbImg').src = src;
+  document.getElementById('lightbox').classList.add('open','single');
 }
 function closeOverlay(){
   document.getElementById('overlay').classList.remove('open');
   document.body.style.overflow='';
-  if(lastFocus && lastFocus.focus) lastFocus.focus({preventScroll:true});
+  if(lastFocus && lastFocus.isConnected && lastFocus.focus) lastFocus.focus({preventScroll:true});
 }
 document.addEventListener('keydown', (e)=>{
   if(document.getElementById('lightbox').classList.contains('open')){
