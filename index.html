@@ -154,6 +154,7 @@ section{padding:110px 0; position:relative;}
 .skill-group{margin-bottom:22px;}
 .skill-group-name{font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--muted); text-transform:uppercase; margin-bottom:10px;}
 .skill-chips{display:flex; flex-wrap:wrap; gap:6px;}
+.skill-note{font-size:14px; line-height:1.6; color:#C9C9CF;}
 .skill-chips .chip{color:var(--text); border-color:#34343C; background:var(--surface);}
 @media(max-width:900px){ .exp-grid{grid-template-columns:1fr; gap:56px;} .skills-box{position:static;} }
 
@@ -317,11 +318,11 @@ footer .wrap{display:flex; justify-content:center; text-align:center;}
         <span class="line"><span>Thenukka</span></span>
         <span class="line"><span>Logeswaran</span></span>
       </h1>
-      <p class="hero-sub">Mechanical engineering student at the University of Toronto. I love building and deisging things that are functional, useful, aesthetic and most importantly challenge me and are cool!</p>
+      <p class="hero-sub">Mechanical engineering student at the University of Toronto. I design things that need to actually work — gearboxes, combat robots, load-bearing structures — then build them, break them, and figure out why.</p>
       <div class="hero-cta">
         <a class="btn" href="#projects">View projects →</a>
         <a class="btn ghost" href="https://www.linkedin.com/in/thenukka-l/" target="_blank" rel="noopener">LinkedIn ↗</a>
-        <a class="btn ghost" href="mailto:thenukka.logeswaran@mail.utoronto.ca">Email ↗</a>
+        <a class="btn ghost" href="mailto:thenukats.24@gmail.com">Email ↗</a>
       </div>
     </div>
 
@@ -356,7 +357,7 @@ footer .wrap{display:flex; justify-content:center; text-align:center;}
 
     <div class="about-grid">
       <div class="reveal">
-        <p>I'm a second-year Mechanical Engineering student at UofT with a habit of taking things apart to see how they work — then trying to build something better. Most of my time goes into <b>hands-on prototyping</b>: CAD one day, a soldering iron or a bandsaw the next.</p>
+        <p>I'm a third-year Mechanical Engineering student at UofT with a habit of taking things apart to see how they work — then trying to build something better. Most of my time goes into <b>hands-on prototyping</b>: CAD one day, a soldering iron or a bandsaw the next.</p>
         <p>I currently co-lead the <b>UTRA Combat Robotics</b> team's weapon subsystem design, and I've spent the last two years moving through UofT's Praxis design studios, a matboard bridge that had to survive a 400N load, and a robotic camera arm — always chasing the same thing: a solution that's clever <i>and</i> actually manufacturable.</p>
         <p>Outside the shop, I mentor younger students in CAD and robotics with my FIRST Robotics team, teaching the fundamentals I once had to learn myself.</p>
       </div>
@@ -403,7 +404,7 @@ footer .wrap{display:flex; justify-content:center; text-align:center;}
         <h3 class="contact-big">Open to Co-op<br><em>PEY 2027-28</em></h3>
         <p>Looking for a 12-16 month mechanical design, manufacturing, robotics or motorsport co-op where I can build real hardware with a real team. If that's you — reach out.</p>
         <div class="contact-cta">
-          <a class="btn" href="mailto:thenukka.logeswaran@mail.utoronto.ca">Send an email →</a>
+          <a class="btn" href="mailto:thenukats.24@gmail.com">Send an email →</a>
           <a class="btn ghost" href="https://www.linkedin.com/in/thenukka-l/" target="_blank" rel="noopener">Connect on LinkedIn ↗</a>
         </div>
       </div>
@@ -411,7 +412,7 @@ footer .wrap{display:flex; justify-content:center; text-align:center;}
         <div class="status"><span class="dot"></span>AVAILABLE — PEY CO-OP</div>
         <div class="tb-fields">
           <div class="tb-field"><span>Name</span><b>Thenukka Logeswaran</b></div>
-          <div class="tb-field"><span>Email</span><a href="mailto:thenukka.logeswaran@mail.utoronto.ca">thenukka.logeswaran@mail.utoronto.ca</a></div>
+          <div class="tb-field"><span>Email</span><a href="mailto:thenukats.24@gmail.com">thenukats.24@gmail.com</a></div>
           <div class="tb-field"><span>LinkedIn</span><a href="https://www.linkedin.com/in/thenukka-l/" target="_blank" rel="noopener">linkedin.com/in/thenukka-l</a></div>
           <div class="tb-field"><span>Based in</span><b>Toronto, ON</b></div>
         </div>
@@ -572,17 +573,78 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 /* ============ SKILLS ============ */
 const skills = [
-  ['CAD & Simulation','SolidWorks (CSWA)'],
-  ['CAD & Simulation','Onshape'],
-  ['CAD & Simulation','AutoCAD'],
-  ['Design & Manufacturing','CNC Machining'],
-  ['Design & Manufacturing','3D Printing (FDM)'],
-  ['Design & Manufacturing','Laser Cutting'],
-  ['Design & Manufacturing','Carbon Fiber Layups'],
-  ['Design & Manufacturing','Lathe Machining'],
-  ['Programming & Controls','Python'],
-  ['Programming & Controls','MATLAB'],
-  ['Programming & Controls','C'],
+ [
+  "CAD & Engineering Design",
+  "SolidWorks (CSWA)"
+ ],
+ [
+  "CAD & Engineering Design",
+  "Onshape"
+ ],
+ [
+  "CAD & Engineering Design",
+  "AutoCAD"
+ ],
+ [
+  "CAD & Engineering Design",
+  "Engineering Drawings"
+ ],
+ [
+  "CAD & Engineering Design",
+  "GD&T"
+ ],
+ [
+  "CAD & Engineering Design",
+  "Design for Assembly"
+ ],
+ [
+  "Manufacturing & Prototyping",
+  "CNC Machining"
+ ],
+ [
+  "Manufacturing & Prototyping",
+  "Manual Milling & Turning"
+ ],
+ [
+  "Manufacturing & Prototyping",
+  "3D Printing (FDM)"
+ ],
+ [
+  "Manufacturing & Prototyping",
+  "Laser Cutting"
+ ],
+ [
+  "Manufacturing & Prototyping",
+  "Carbon Fiber Layups"
+ ],
+ [
+  "Data Analysis & Programming",
+  "Python"
+ ],
+ [
+  "Data Analysis & Programming",
+  "MATLAB"
+ ],
+ [
+  "Data Analysis & Programming",
+  "C"
+ ],
+ [
+  "Data Analysis & Programming",
+  "PLC Fundamentals"
+ ],
+ [
+  "Project Coordination & Documentation",
+  "Microsoft Office"
+ ],
+ [
+  "Project Coordination & Documentation",
+  "GitHub"
+ ],
+ [
+  "Project Coordination & Documentation",
+  "Technical Documentation"
+ ]
 ];
 const skillsBody = document.getElementById('skillsBody');
 const skillGroups = {};
@@ -592,6 +654,15 @@ Object.keys(skillGroups).forEach(cat=>{
   group.className = 'skill-group';
   group.innerHTML = `<div class="skill-group-name">${cat}</div><div class="skill-chips">${skillGroups[cat].map(t=>`<span class="chip">${t}</span>`).join('')}</div>`;
   skillsBody.appendChild(group);
+});
+[
+  ['Education', 'University of Toronto<br>BASc Mechanical Engineering + PEY Co-op<br>Sept 2024 – May 2029 (expected)<br>Intended minor: Advanced Manufacturing &amp; Robotics'],
+  ['Machining course', 'George Brown Basic Machining Course: machined and assembled a functional piston through lathing and milling, reading engineering drawings to meet tight tolerancing specifications.'],
+].forEach(([name, text])=>{
+  const g = document.createElement('div');
+  g.className = 'skill-group';
+  g.innerHTML = `<div class="skill-group-name">${name}</div><p class="skill-note">${text}</p>`;
+  skillsBody.appendChild(g);
 });
 
 /* ============ PROJECTS DATA ============
@@ -640,16 +711,20 @@ const projects = [
    "combat_table"
   ],
   "roleTitle": "Subteam co-lead",
-  "context": "UTRA Combat Robotics (club team)",
+  "context": "UTRA Combat Robotics (5+ person subteam)",
   "timeline": "Nov 2024 — Present",
   "stats": [
    [
-    "3 lb",
-    "Weight class"
+    "< 10 min",
+    "Between-match repair time"
    ],
    [
-    "< 15 min",
-    "Repair window between matches"
+    "4 months",
+    "To complete the initial build"
+   ],
+   [
+    "2 months",
+    "To add self-righting"
    ],
    [
     "NHRL + BotBrawl",
@@ -680,7 +755,8 @@ const projects = [
       "img": "combat_damage",
       "caption": "Post-match damage analysis before repairs, identified weak points in screw placements, inability to self right and weight balance which caused trouble with driving control"
      }
-    ]
+    ],
+    "body": "Investigated mechanical failures through fabrication and competition testing."
    },
    {
     "title": "Redesign",
@@ -689,7 +765,8 @@ const projects = [
       "img": "combat_v2cad",
       "caption": "Redesign of our robot following our first competition. Reduced the width to save weight and reduce easy access points, also ensured the wheels were able to contact the ground when upside down so we can self-right. Chose to redesign upright ears out of carbon-fiber instead of aluminum to prevent them from bending inwards from impact and blocking the weapon. Added TPU forks to the sides to gain better control when attacking opponent robots."
      }
-    ]
+    ],
+    "body": "Redesigned the robot to incorporate a self-righting mechanism within 2 months."
    }
   ],
   "tools": [
@@ -698,12 +775,24 @@ const projects = [
     "CAD for the weapon and drive modules. I coordinated CAD workflows, documented BOMs and maintained revision history across the team."
    ],
    [
+    "Jigs, fixtures & manufacturing files",
+    "Created drilling jigs, fixtures, and manufacturing files for CNC machining, 3D printing, and laser cutting, helping teammates fabricate components consistently."
+   ],
+   [
     "Design for manufacture",
-    "Designed parts for easy 3D printing and laser-cut manufacturing, so broken parts could be reprinted or recut between matches. Added TPU side forks for better control when attacking opponents."
+    "Designed modular drive and weapon assemblies with accessible components, reducing between-match mechanical repair time to under 10 minutes. Added TPU side forks for better control when attacking opponents."
    ],
    [
     "Carbon fiber",
     "Redesigned the upright ears in carbon fiber instead of aluminum so impacts stop bending them inwards into the weapon."
+   ],
+   [
+    "Failure investigation",
+    "Investigated mechanical failures through fabrication and competition testing, then redesigned the robot to incorporate a self-righting mechanism within 2 months."
+   ],
+   [
+    "Team coordination",
+    "Coordinated CAD, manufacturing, assembly, and testing to complete the initial build within 4 months, with design reviews, task tracking, and build deadlines to keep the team aligned."
    ]
   ],
   "reflection": "This strengthened my teamwork and communication skills as I coordinated CAD workflows across the team, and reinforced how much I enjoy designing under real competition pressure and how to design parts for easy 3d printing and laser cut manufacturing."
@@ -821,19 +910,23 @@ const projects = [
    "arm_extended"
   ],
   "roleTitle": "Vertical arm & shoulder joint",
-  "context": "MIE243 course project (large team)",
-  "timeline": "Fall 2025",
+  "context": "MIE243 course project (four-person team)",
+  "timeline": "Oct — Nov 2025",
   "stats": [
    [
-    "6 DOF",
-    "Minimum"
+    "1 m",
+    "Reach target"
    ],
    [
     "3 kg",
-    "Payload"
+    "Payload target"
    ],
    [
-    "< $5k",
+    "±0.1 mm",
+    "Repeatability target"
+   ],
+   [
+    "< $5,000",
     "Budget"
    ]
   ],
@@ -871,19 +964,31 @@ const projects = [
   "tools": [
    [
     "SolidWorks",
-    "CAD for the vertical arm and shoulder joint, the highest-torque joint in the assembly."
+    "Concept design for a six-degree-of-freedom arm targeting a 1 m reach, 3 kg payload, 0.5 m/s camera motion, ±0.1 mm repeatability, and a budget under $5,000. My focus was the vertical arm and shoulder joint, the highest-torque joint in the assembly."
+   ],
+   [
+    "Component evaluation",
+    "Evaluated commercially available actuators and transmission components against torque, speed, packaging, cost, and positioning requirements."
    ],
    [
     "Motor & transmission sizing",
     "Motor chosen from torque calculations, paired with a 50:1 planetary gearbox, then a 3:1 belt-and-pulley with the motor moved to the base to lower the center of gravity."
    ],
    [
+    "Weighted decision matrix",
+    "Compared design concepts and justified component selection using engineering calculations and manufacturer datasheets."
+   ],
+   [
     "Pugh chart",
     "Used to evaluate alternatives across the team."
    ],
    [
+    "Design reviews",
+    "Collaborated with a four-person team through design reviews and documented trade-offs to support design decisions."
+   ],
+   [
     "Sketching",
-    "Drawings and sketches to communicate ideas clearly across a large team."
+    "Drawings and sketches to communicate ideas clearly across the team."
    ]
   ],
   "reflection": "This project simulated a real engineering design process — the challenges and importance of collaboration in large team projects, and how drawings and sketches are essential tools for communicating ideas clearly."
@@ -992,7 +1097,7 @@ const projects = [
    "soap_ngos"
   ],
   "roleTitle": "Prototype build & user testing",
-  "context": "Praxis II design studio, for Karma Co-op",
+  "context": "Praxis II design studio, for Karma Co-op (four-person team)",
   "timeline": "Winter 2025",
   "stats": [
    [
@@ -1002,6 +1107,10 @@ const projects = [
    [
     "7×",
     "Faster to fill"
+   ],
+   [
+    "~20 s",
+    "Less dispensing time"
    ],
    [
     "3",
@@ -1035,8 +1144,20 @@ const projects = [
   ],
   "tools": [
    [
-    "Solenoid valve & relay circuit",
-    "Built and wired the prototype: a solenoid valve, relay switch and push-button circuit, with the relay also triggering the air compressor."
+    "Stakeholder requirements",
+    "Worked with a four-person team and Karma Co-op stakeholders to identify dispensing challenges and establish requirements for speed, accessibility, and spill prevention."
+   ],
+   [
+    "ESP32, relay & solenoid circuit",
+    "Integrated an ESP32, relay, solenoid valves, compressor, and push-button controls into a functional automated dispensing prototype."
+   ],
+   [
+    "Dispensing sequence",
+    "Developed and tested the dispensing sequence, reducing dispensing time by approximately 20 seconds compared with the existing process."
+   ],
+   [
+    "Catch tray & bottle holder",
+    "Designed and fabricated a catch tray and bottle holder to address spillage and container-handling issues identified during prototype testing."
    ],
    [
     "Measurement matrix",
@@ -1361,11 +1482,51 @@ document.addEventListener('keydown', (e)=>{
 
 /* ============ EXPERIENCE DATA ============ */
 const experience = [
-  {org:'UTRA Combat Robotics', role:'Subteam Lead', date:'Nov 2024 — Present', bullets:['Designed and built a 3lb combat robot weapon system under strict competition deadlines.','Maintained CAD files, manufacturing docs, and revision history across the design process.']},
-  {org:'Human Powered Vehicle Design Team', role:'Team Member', date:'Oct 2024 — Aug 2025', bullets:['Fabricated and assembled lightweight composite vehicle components.','Prototyped, tested, and documented design improvements for vehicle systems.']},
-  {org:'Rexdale Community Hub', role:'STEM Coordinator', date:'Sept 2023 — Sept 2025', bullets:['Coordinated STEM programming and workshops for youth and seniors, end to end.','Led workshops explaining technical concepts to participants of varying experience levels.']},
-  {org:'Sunnybrook Research Institute', role:'Engineering Research Intern', date:'Jul 2024 — Aug 2024', bullets:['Collected and analyzed experimental data using MATLAB, Python, and Excel.','Automated portions of the data collection and processing workflow, improving testing efficiency.']},
-  {org:'NACI Robotics (FIRST Robotics)', role:'Mentor & Team Member', date:'Sept 2021 — Sept 2024', bullets:['Mentored 15+ students in CAD, prototyping, and engineering fundamentals.','Organized electrical wiring layouts, improving reliability and troubleshooting speed by ~10%.']},
+ {
+  "org": "UTRA Combat Robotics",
+  "role": "Subteam Lead",
+  "date": "Nov 2024 — Present",
+  "bullets": [
+   "Co-led a 5+ person team to design and build a modular 3 lb combat robot in 4 months, with drive and weapon assemblies that cut between-match repairs to under 10 minutes.",
+   "Created jigs, fixtures, and manufacturing files for CNC machining, 3D printing, and laser cutting, then redesigned the robot with a self-righting mechanism within 2 months after investigating competition failures."
+  ]
+ },
+ {
+  "org": "NACI Robotics (FIRST Robotics)",
+  "role": "Mechanical Lead / Mentor",
+  "date": "Oct 2021 — Present",
+  "bullets": [
+   "Led mechanical design and fabrication of a competition robot, turning game requirements into CAD assemblies and refining mechanisms through prototyping and testing.",
+   "Mentored 20+ students in CAD, prototyping, and troubleshooting, and coordinated pit-crew repairs that returned the robot to operation in under 15 minutes on average."
+  ]
+ },
+ {
+  "org": "Human Powered Vehicle Design Team",
+  "role": "Team Member",
+  "date": "Oct 2024 — Aug 2025",
+  "bullets": [
+   "Fabricated and assembled lightweight composite vehicle components.",
+   "Prototyped, tested, and documented design improvements for vehicle systems."
+  ]
+ },
+ {
+  "org": "Rexdale Community Hub",
+  "role": "STEM Coordinator",
+  "date": "Sept 2023 — Sept 2025",
+  "bullets": [
+   "Coordinated 50+ hands-on STEM workshops for 20+ youth and seniors, and community events reaching 1,000+ people, teaching safe CNC, 3D printing, and power-tool use in a makerspace for up to 30 users.",
+   "Designed the 700 sq. ft. makerspace layout in AutoCAD, and created Onshape models and 2D drawings that took participants from digital design to physical prototype."
+  ]
+ },
+ {
+  "org": "Sunnybrook Research Institute",
+  "role": "Engineering Research Intern",
+  "date": "Jul 2024 — Aug 2024",
+  "bullets": [
+   "Automated oscilloscope data collection with Python/PyVISA scripts, cutting manual collection to about 3 minutes per trial, with documented code shared on GitHub.",
+   "Analyzed waveforms in Python and MATLAB, and designed adjustable conformal helmet mounts in Onshape to improve positioning repeatability during experiments."
+  ]
+ }
 ];
 const timelineBody = document.getElementById('timelineBody');
 experience.forEach((e,i)=>{
